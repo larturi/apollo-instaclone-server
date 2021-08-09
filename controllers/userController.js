@@ -1,0 +1,95 @@
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const awsUploadImage = require('../utils/aws-upload-image');
+
+const createToken = (user, SECRET_KEY, expiresIn) => {
+   const { id, name, email, username } = user;
+   const payload = {
+      id,
+      name,
+      email,
+      username,
+   };
+
+   return jwt.sign(payload, SECRET_KEY, { expiresIn });
+};
+
+const register = async (input) => {
+   const newUser = input;
+   newUser.email = newUser.email.toLowerCase();
+   newUser.username = newUser.username.toLowerCase();
+
+   const { email, username, password } = newUser;
+
+   // Check si el email esta en uso
+   const checkEmails = await User.findOne({ email });
+   if (checkEmails) throw new Error('El email ya esta en uso');
+
+   // Check si el username esta en uso
+   const checkUsername = await User.findOne({ username });
+   if (checkUsername) throw new Error('El username ya esta en uso');
+
+   // Encriptar la contraseña
+   const salt = await bcrypt.genSaltSync(10);
+   newUser.password = await bcrypt.hash(password, salt);
+
+   try {
+      const user = new User(newUser);
+      user.save();
+      return user;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
+
+const login = async (input) => {
+   const { email, password } = input;
+   const userFound = await User.findOne({ email: email.toLowerCase() });
+
+   if (!userFound) throw new Error('Email o password incorrecto');
+
+   const passwordSucces = await bcrypt.compare(password, userFound.password);
+   if (!passwordSucces) throw new Error('Email o password incorrecto');
+
+   return {
+      token: createToken(userFound, process.env.SECRET_KEY, '24h'),
+   };
+};
+
+const getUser = async (id, username) => {
+   let user = null;
+
+   if (id) user = await User.findById(id);
+   if (username) user = await User.findOne({ username });
+
+   if (!user) throw new Error('Usuario no encontrado');
+
+   return user;
+};
+
+const updateAvatar = async (file) => {
+   const { createReadStream, mimetype } = await file;
+   const extension = mimetype.split('/')[1];
+   const imageName = `avatar/avt.${extension}`;
+   const fileData = createReadStream();
+
+   try {
+      const result = await awsUploadImage(fileData, imageName);
+      console.log(result.Location);
+   } catch (error) {
+      return {
+         status: false,
+         urlAvatar: null,
+      };
+   }
+   return null;
+};
+
+module.exports = {
+   register,
+   login,
+   getUser,
+   updateAvatar,
+};
