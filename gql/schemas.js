@@ -32,6 +32,14 @@ const typeDefs = gql`
       email: String!
       password: String!
    }
+   input UserUpdateInput {
+      name: String
+      email: String
+      currentPassword: String
+      newPassword: String
+      siteWeb: String
+      bio: String
+   }
 
    ##### Querys #####
    type Query {
@@ -45,6 +53,8 @@ const typeDefs = gql`
       registerUser(input: UserInput): User
       loginUser(input: LoginInput): Token
       updateAvatar(file: Upload): UpdateAvatar
+      deleteAvatar: Boolean
+      updateUser(input: UserUpdateInput): Boolean
    }
 `;
 

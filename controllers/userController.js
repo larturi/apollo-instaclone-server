@@ -91,9 +91,47 @@ const updateAvatar = async (file, ctx) => {
    }
 };
 
+const deleteAvatar = async (ctx) => {
+   const { id } = ctx.user;
+
+   try {
+      await User.findByIdAndUpdate(id, { avatar: '' });
+      return true;
+   } catch (error) {
+      return false;
+   }
+};
+
+const updateUser = async (input, ctx) => {
+   const { id } = ctx.user;
+
+   try {
+      if (input.currentPassword && input.newPassword) {
+         // Cambiar contraseña
+         const userFound = await User.findById(id);
+         const passwordSucces = await bcrypt.compare(
+            input.currentPassword,
+            userFound.password
+         );
+         if (!passwordSucces) throw new Error('Contraseña incorrecta');
+         const salt = await bcrypt.genSaltSync(10);
+         const newPasswordCrypt = await bcrypt.hash(input.newPassword, salt);
+         await User.findByIdAndUpdate(id, { password: newPasswordCrypt });
+      } else {
+         // Actualizar datos
+         await User.findByIdAndUpdate(id, input);
+      }
+      return true;
+   } catch (error) {
+      return false;
+   }
+};
+
 module.exports = {
    register,
    login,
    getUser,
    updateAvatar,
+   deleteAvatar,
+   updateUser,
 };
