@@ -127,6 +127,18 @@ const updateUser = async (input, ctx) => {
    }
 };
 
+const search = async (query) => {
+   const users = await User.find({
+      $or: [
+         { username: { $regex: query, $options: 'i' } },
+         { name: { $regex: query, $options: 'i' } },
+         { email: { $regex: query, $options: 'i' } },
+      ],
+   });
+
+   return users;
+};
+
 module.exports = {
    register,
    login,
@@ -134,4 +146,5 @@ module.exports = {
    updateAvatar,
    deleteAvatar,
    updateUser,
+   search,
 };
