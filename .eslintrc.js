@@ -1,13 +1,12 @@
-
 module.exports = {
-    rules: {
+   rules: {
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
-    },
-    parserOptions: {
-        ecmaVersion: 2017
-    },
-    env: {
-        es6: true
-    }
-  };
+   },
+   parserOptions: {
+      ecmaVersion: 2017,
+   },
+   env: {
+      es6: true,
+   },
+};

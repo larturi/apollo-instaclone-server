@@ -1,10 +1,15 @@
 const userController = require('../controllers/userController');
+const followController = require('../controllers/followController');
 
 const resolvers = {
    Query: {
       // User
       getUser: (_, { id, username }) => userController.getUser(id, username),
       search: (_, { query }) => userController.search(query),
+
+      // Follow
+      isFollow: (_, { username }, ctx) =>
+         followController.isFollow(username, ctx),
    },
    Mutation: {
       // User
@@ -14,6 +19,9 @@ const resolvers = {
          userController.updateAvatar(file, ctx),
       deleteAvatar: (_, {}, ctx) => userController.deleteAvatar(ctx),
       updateUser: (_, { input }, ctx) => userController.updateUser(input, ctx),
+
+      // Follow
+      follow: (_, { username }, ctx) => followController.follow(username, ctx),
    },
 };
 

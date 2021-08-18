@@ -46,6 +46,9 @@ const typeDefs = gql`
       # User
       getUser(id: ID, username: String): User
       search(query: String): [User]
+
+      # Follow
+      isFollow(username: String!): Boolean
    }
 
    ##### Mutations #####
@@ -56,6 +59,9 @@ const typeDefs = gql`
       updateAvatar(file: Upload): UpdateAvatar
       deleteAvatar: Boolean
       updateUser(input: UserUpdateInput): Boolean
+
+      # Follow
+      follow(username: String!): Boolean
    }
 `;
 
