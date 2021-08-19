@@ -19,6 +19,25 @@ const follow = async (username, ctx) => {
    }
 };
 
+const unFollow = async (username, ctx) => {
+   const userFound = await User.findOne({ username });
+   if (!userFound) throw new Error('User not found');
+
+   try {
+      const follow = await Follow.findOneAndDelete({
+         idUser: ctx.user.id,
+         follow: userFound._id,
+      });
+
+      if (follow) return true;
+
+      return false;
+   } catch (error) {
+      console.log(error);
+      return false;
+   }
+};
+
 const isFollow = async (username, ctx) => {
    const userFound = await User.findOne({ username });
    if (!userFound) throw new Error('User not found');
@@ -34,5 +53,6 @@ const isFollow = async (username, ctx) => {
 
 module.exports = {
    follow,
+   unFollow,
    isFollow,
 };
