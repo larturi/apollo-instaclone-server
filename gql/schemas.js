@@ -49,6 +49,7 @@ const typeDefs = gql`
 
       # Follow
       isFollow(username: String!): Boolean
+      getFollowers(username: String!): [User]
    }
 
    ##### Mutations #####

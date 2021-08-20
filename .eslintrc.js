@@ -4,7 +4,7 @@ module.exports = {
       semi: ['error', 'always'],
    },
    parserOptions: {
-      ecmaVersion: 2017,
+      ecmaVersion: 9,
    },
    env: {
       es6: true,
