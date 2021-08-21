@@ -66,9 +66,25 @@ const getFollowers = async (username) => {
    return followersList;
 };
 
+const getFolloweds = async (username) => {
+   const user = await User.findOne({ username });
+   const followeds = await Follow.find({
+      idUser: user._id,
+   }).populate('follow');
+
+   const followedsList = [];
+
+   for await (const followed of followeds) {
+      followedsList.push(followed.follow);
+   }
+
+   return followedsList;
+};
+
 module.exports = {
    follow,
    unFollow,
    isFollow,
    getFollowers,
+   getFolloweds,
 };
