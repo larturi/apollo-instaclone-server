@@ -41,7 +41,7 @@ function server() {
             } catch (error) {
                console.error('### ERROR ###');
                console.error(error);
-               throw new Error('Token no valido');
+               return { error: 'Error en el token' };
             }
          }
       },
