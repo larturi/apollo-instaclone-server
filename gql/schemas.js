@@ -21,8 +21,8 @@ const typeDefs = gql`
       urlAvatar: String
    }
    type Publish {
-      status: Boolean!
-      urlFile: String!
+      status: Boolean
+      urlFile: String
    }
 
    ##### Inputs #####

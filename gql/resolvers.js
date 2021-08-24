@@ -31,7 +31,7 @@ const resolvers = {
          followController.unFollow(username, ctx),
 
       // Publication
-      publish: (_, { file }, ctx) => publicationController.publish(input, ctx),
+      publish: (_, { file }, ctx) => publicationController.publish(file, ctx),
    },
 };
 
