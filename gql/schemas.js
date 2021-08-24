@@ -24,6 +24,13 @@ const typeDefs = gql`
       status: Boolean
       urlFile: String
    }
+   type Publication {
+      id: ID
+      idUser: ID
+      file: String
+      typeFile: String
+      createAt: String
+   }
 
    ##### Inputs #####
    input UserInput {
@@ -55,6 +62,9 @@ const typeDefs = gql`
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User]
       getFolloweds(username: String!): [User]
+
+      # Publication
+      getPublications(username: String!): [Publication]
    }
 
    ##### Mutations #####

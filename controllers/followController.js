@@ -1,5 +1,5 @@
 const Follow = require('../models/follow');
-const User = require('../models/User');
+const User = require('../models/user');
 
 const follow = async (username, ctx) => {
    const userFound = await User.findOne({ username });
