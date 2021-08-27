@@ -31,6 +31,12 @@ const typeDefs = gql`
       typeFile: String
       createAt: String
    }
+   type Comment {
+      idUser: ID
+      idPublication: ID
+      comment: String
+      createAt: String
+   }
 
    ##### Inputs #####
    input UserInput {
@@ -50,6 +56,10 @@ const typeDefs = gql`
       newPassword: String
       siteWeb: String
       bio: String
+   }
+   input CommentInput {
+      idPublication: ID
+      comment: String
    }
 
    ##### Querys #####
@@ -82,6 +92,9 @@ const typeDefs = gql`
 
       # Publication
       publish(file: Upload): Publish
+
+      # Comment
+      addComment(input: CommentInput): Comment
    }
 `;
 
