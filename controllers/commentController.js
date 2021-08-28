@@ -15,6 +15,17 @@ const addComment = async (input, ctx) => {
    }
 };
 
+const getComments = async (idPublication) => {
+   try {
+      const result = await Comment.find({ idPublication }).populate('idUser');
+      return result;
+   } catch (error) {
+      console.error(error);
+      return null;
+   }
+};
+
 module.exports = {
    addComment,
+   getComments,
 };

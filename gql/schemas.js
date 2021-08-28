@@ -32,7 +32,7 @@ const typeDefs = gql`
       createAt: String
    }
    type Comment {
-      idUser: ID
+      idUser: User
       idPublication: ID
       comment: String
       createAt: String
@@ -75,6 +75,9 @@ const typeDefs = gql`
 
       # Publication
       getPublications(username: String!): [Publication]
+
+      # Comment
+      getComments(idPublication: ID!): [Comment]
    }
 
    ##### Mutations #####

@@ -39,9 +39,9 @@ function server() {
                   user,
                };
             } catch (error) {
-               console.error('### ERROR ###');
-               console.error(error);
-               return { error: 'Error en el token' };
+               console.log('#### ERROR ####');
+               console.log(error);
+               throw new Error('Token invalido');
             }
          }
       },
