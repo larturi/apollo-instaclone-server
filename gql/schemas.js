@@ -81,6 +81,7 @@ const typeDefs = gql`
 
       # Like
       isLike(idPublication: ID!): Boolean
+      countLikes(idPublication: ID!): Int
    }
 
    ##### Mutations #####
