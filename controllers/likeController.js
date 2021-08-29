@@ -9,7 +9,7 @@ const addLike = async (idPublication, ctx) => {
       like.save();
       return true;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };
@@ -21,7 +21,7 @@ const deleteLike = async (idPublication, ctx) => {
       });
       return true;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };
@@ -34,7 +34,7 @@ const isLike = async (idPublication, ctx) => {
       if (!result) throw new Error('No ha dado like');
       return true;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };
@@ -44,7 +44,7 @@ const countLikes = async (idPublication) => {
       const result = await Like.countDocuments({ idPublication });
       return result;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };

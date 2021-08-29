@@ -17,6 +17,7 @@ const resolvers = {
          followController.getFollowers(username),
       getFolloweds: (_, { username }) =>
          followController.getFolloweds(username),
+      getNotFolloweds: (_, {}, ctx) => followController.getNotFolloweds(ctx),
 
       // Publication
       getPublications: (_, { username }) =>

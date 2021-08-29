@@ -14,7 +14,7 @@ const follow = async (username, ctx) => {
       follow.save();
       return true;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };
@@ -33,7 +33,7 @@ const unFollow = async (username, ctx) => {
 
       return false;
    } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
    }
 };
@@ -81,10 +81,31 @@ const getFolloweds = async (username) => {
    return followedsList;
 };
 
+const getNotFolloweds = async (ctx) => {
+   const users = await User.find().limit(50);
+
+   const arrayUsers = [];
+
+   for await (const user of users) {
+      const isFind = await Follow.findOne({
+         idUser: ctx.user.id,
+         follow: user._id,
+      });
+      console.log(isFind);
+      if (!isFind) {
+         if (user._id.toString() !== ctx.user.id.toString()) {
+            arrayUsers.push(user);
+         }
+      }
+   }
+   return arrayUsers;
+};
+
 module.exports = {
    follow,
    unFollow,
    isFollow,
    getFollowers,
    getFolloweds,
+   getNotFolloweds,
 };

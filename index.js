@@ -15,7 +15,7 @@ mongoose.connect(
    },
    (err, _) => {
       if (err) {
-         console.log('Error al intentar conectar a la BD');
+         console.error('Error al intentar conectar a la BD');
       } else {
          server();
       }
@@ -39,8 +39,8 @@ function server() {
                   user,
                };
             } catch (error) {
-               console.log('#### ERROR ####');
-               console.log(error);
+               console.warn('#### ERROR ####');
+               console.warn(error);
                throw new Error('Token invalido');
             }
          }
@@ -48,6 +48,6 @@ function server() {
    });
 
    serverApollo.listen({ port: 4001 }).then(({ url }) => {
-      console.log(`Apollo Server is now running in ${url}`);
+      console.warn(`Apollo Server is now running in ${url}`);
    });
 }
