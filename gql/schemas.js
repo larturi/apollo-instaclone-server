@@ -101,6 +101,7 @@ const typeDefs = gql`
 
       # Like
       addLike(idPublication: ID!): Boolean
+      deleteLike(idPublication: ID!): Boolean
    }
 `;
 

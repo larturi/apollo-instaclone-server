@@ -13,7 +13,19 @@ const addLike = async (idPublication, ctx) => {
       return false;
    }
 };
+const deleteLike = async (idPublication, ctx) => {
+   try {
+      await Like.findOneAndDelete({ idPublication }).where({
+         idUser: ctx.user.id,
+      });
+      return true;
+   } catch (error) {
+      console.log(error);
+      return false;
+   }
+};
 
 module.exports = {
    addLike,
+   deleteLike,
 };
