@@ -2,6 +2,7 @@ const userController = require('../controllers/userController');
 const followController = require('../controllers/followController');
 const publicationController = require('../controllers/publicationController');
 const commentController = require('../controllers/commentController');
+const likeController = require('../controllers/likeController');
 
 const resolvers = {
    Query: {
@@ -45,6 +46,10 @@ const resolvers = {
       // Comment
       addComment: (_, { input }, ctx) =>
          commentController.addComment(input, ctx),
+
+      // Like
+      addLike: (_, { idPublication }, ctx) =>
+         likeController.addLike(idPublication, ctx),
    },
 };
 
