@@ -25,6 +25,10 @@ const resolvers = {
       // Comment
       getComments: (_, { idPublication }) =>
          commentController.getComments(idPublication),
+
+      // Like
+      isLike: (_, { idPublication }, ctx) =>
+         likeController.isLike(idPublication, ctx),
    },
    Mutation: {
       // User
