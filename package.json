@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "start": "node ./index.js",
+    "start": "node index.js",
     "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
