@@ -91,7 +91,6 @@ const getNotFolloweds = async (ctx) => {
          idUser: ctx.user.id,
          follow: user._id,
       });
-      console.log(isFind);
       if (!isFind) {
          if (user._id.toString() !== ctx.user.id.toString()) {
             arrayUsers.push(user);
