@@ -11,6 +11,8 @@ const publish = async (file, ctx) => {
    const filename = `publication/${uuidv4()}.${extension}`;
    const fileData = createReadStream();
 
+   console.log(file);
+
    try {
       const result = await awsUploadImage(fileData, filename);
       const publication = new Publication({
