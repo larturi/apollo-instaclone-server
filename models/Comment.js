@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const CommentSchema = new mongoose.Schema({
    idPublication: {
-      type: mongoose.Schema.Types.ObjectId,https://github.com/larturi/apollo-instaclone-server/blob/main/models/comment.js
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'Publication',
    },
