@@ -1,6 +1,6 @@
-const Publication = require('../models/publication');
-const Follow = require('../models/follow');
-const User = require('../models/user');
+const Publication = require('../models/Publication');
+const Follow = require('../models/Follow');
+const User = require('../models/User');
 const awsUploadImage = require('../utils/aws-upload-image');
 const { v4: uuidv4 } = require('uuid');
 

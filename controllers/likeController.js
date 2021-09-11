@@ -1,4 +1,4 @@
-const Like = require('../models/like');
+const Like = require('../models/Like');
 
 const addLike = async (idPublication, ctx) => {
    try {
