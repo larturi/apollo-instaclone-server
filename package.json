@@ -5,9 +5,6 @@
   "main": "index.js",
   "author": "Leandro Arturi",
   "license": "MIT",
-  "engines": {
-    "node": "12.x"
-  },
   "scripts": {
     "dev": "nodemon ./index.js",
     "start": "node ./index.js",
